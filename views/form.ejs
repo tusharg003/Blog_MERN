@@ -1,0 +1,13 @@
+    <%-include("partials/header.ejs")%>
+
+
+    <form action="/add-blog" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="content">Blog Content</label>
+        <input type="text" id="content" name="content" required>
+        <input type="submit" value="Publish">
+    </form>
+    
+    
+    <%-include("partials/footer.ejs")%>

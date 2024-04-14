@@ -1,14 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header.ejs") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogs</title>
-</head>
+    <h1>
+        Welcome to the Home Page
+    </h1>
 
-<body>
-    <h1>Home Page</h1>
-</body>
+    <p>Here you can see all your journal entries</p>
 
-</html>
+    <% if (blogs.length> 0) { %>
+        <ul>
+            <% blogs.forEach(blog=> { %>
+                <li>
+                    <h2>
+                        <%= blog.title %>
+                    </h2>
+                    <p>
+                        <%= blog.content %>
+                    </p>
+                    <p>Created At: <%= blog.createdOn %>
+                    </p>
+                    <a href="/form"><button>Edit</button></a>
+                    <button onclick="deleteBlog(<%= blog.id %>)">Delete</button>
+                </li>
+                <% }); %>
+        </ul>
+        <a href="/form"><button>Create New Blog</button></a>
+        <% } else { %>
+            <a href="/form"><button>Add your First Blog</button></a>
+            <% } %>
+
+                <script>
+                    function deleteBlog(blogId) {
+                        fetch(`/delete/${blogId}`, { method: "DELETE" })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Reload the page to reflect changes
+                                    window.location.reload();
+                                } else {
+                                    throw new Error('Failed to delete the blog post.');
+                                }
+                            })
+                            .catch(err => {
+                                console.error("An error occurred during the deletion process:", err);
+                            });
+                    }
+                </script>
+
+                <%- include("partials/footer.ejs") %>
