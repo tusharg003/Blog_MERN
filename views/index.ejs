@@ -18,30 +18,31 @@
                     </p>
                     <p>Created At: <%= blog.createdOn %>
                     </p>
-                    <a href="/form"><button>Edit</button></a>
+                    <!-- Edit button -->
+                    <button onclick="editBlog(<%= blog.id %>)">Edit</button>
                     <button onclick="deleteBlog(<%= blog.id %>)">Delete</button>
+
                 </li>
                 <% }); %>
         </ul>
         <a href="/form"><button>Create New Blog</button></a>
+
         <% } else { %>
             <a href="/form"><button>Add your First Blog</button></a>
             <% } %>
-
                 <script>
                     function deleteBlog(blogId) {
-                        fetch(`/delete/${blogId}`, { method: "DELETE" })
-                            .then(response => {
-                                if (response.ok) {
-                                    // Reload the page to reflect changes
-                                    window.location.reload();
-                                } else {
-                                    throw new Error('Failed to delete the blog post.');
-                                }
+                        fetch(`/delete/${blogId}`, { methord: "DELETE" })
+                        then(() => window.location.reload())
+                            .catch((err) => {
+                                console.error("An error occured during the deletion process ", err);
                             })
-                            .catch(err => {
-                                console.error("An error occurred during the deletion process:", err);
-                            });
+                    }
+                </script>
+                <script>
+                    function editBlog(blogId) {
+                        // Redirect to the edit page with the blog ID
+                        window.location.href = `/edit/${blogId}`;
                     }
                 </script>
 

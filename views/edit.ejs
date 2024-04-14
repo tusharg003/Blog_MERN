@@ -1,0 +1,12 @@
+<%-include("partials/header.ejs")%>
+
+    <!-- Edit Blog Form -->
+    <form id="editForm" action="/edit/<%= blog.id %>" method="POST">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" value="<%= blog.title %>"><br>
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content"><%= blog.content %></textarea><br>
+        <button type="submit">Update</button>
+    </form>
+    
+    <%-include("partials/footer.ejs")%>

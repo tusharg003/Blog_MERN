@@ -45,6 +45,31 @@ app.delete("/delete/:id", (req, res) => {
     deleteBlog(id);
     res.sendStatus(204);
 });
+// Edit blog post
+app.get('/edit/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const blog = blogList.find(blog => blog.id === id);
+    if (!blog) {
+        res.status(404).send('Blog post not found.');
+        return; 
+    }
+    res.render('edit.ejs', { blog });
+});
+
+// Handle edit form submission
+app.post('/edit/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const { title, content } = req.body;
+    const index = blogList.findIndex(blog => blog.id === id);
+    if (index !== -1) {
+        blogList[index].title = title;
+        blogList[index].content = content;
+        res.redirect('/');
+    } else {
+        res.status(404).send('Blog post not found.');
+    }
+});
+
 
 // the blog creation page
 app.get('/form', (req, res) => {
