@@ -12,9 +12,6 @@ app.use(express.static("public"));
 
 let blogList = [];
 
-function deleteBlog(id) {
-    blogList = blogList.filter(blog => blog.id !== id);
-}
 
 app.post('/add-blog', (req, res) => {
     const { title, content } = req.body;
@@ -27,19 +24,22 @@ app.post('/add-blog', (req, res) => {
         minute: '2-digit',
         hour12: false,
     });
-
+    
     const newBlog = {
         id: blogList.length + 1,
         title,
         content,
         createdOn: formattedDate,
     };
-
+    
     blogList.push(newBlog);
     console.log(req.body);
     res.redirect('/');
 });
 
+function deleteBlog(id) {
+    blogList = blogList.filter(blog => blog.id !== id);
+}
 //delete blog
 app.delete("/delete/:id", (req, res) => {
     const id = parseInt(req.params.id);

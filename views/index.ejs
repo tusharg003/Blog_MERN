@@ -38,6 +38,17 @@
                                 console.error("An error occured during the deletion process ", err);
                             })
                     }
+                    /*
+                    async function deleteBlog(blogId) {
+                        try {
+                            await fetch(`/delete/${blogId}`, { method: "DELETE" });
+                            window.location.reload();
+                        } catch (err) {
+                            console.error("An error occurred during the deletion process ", err);
+                        }
+                    }
+
+                    */
 
                     function editBlog(blogId) {
                         // Redirect to the edit page with the blog ID
