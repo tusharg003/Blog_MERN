@@ -40,11 +40,13 @@ app.post('/add-blog', (req, res) => {
     res.redirect('/');
 });
 
+//delete blog
 app.delete("/delete/:id", (req, res) => {
     const id = parseInt(req.params.id);
     deleteBlog(id);
     res.sendStatus(204);
 });
+
 // Edit blog post
 app.get('/edit/:id', (req, res) => {
     const id = parseInt(req.params.id);

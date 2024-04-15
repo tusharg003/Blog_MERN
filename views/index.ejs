@@ -32,14 +32,13 @@
             <% } %>
                 <script>
                     function deleteBlog(blogId) {
-                        fetch(`/delete/${blogId}`, { methord: "DELETE" })
-                        then(() => window.location.reload())
+                        fetch(`/delete/${blogId}`, { method: "DELETE" })
+                            .then(() => window.location.reload())
                             .catch((err) => {
                                 console.error("An error occured during the deletion process ", err);
                             })
                     }
-                </script>
-                <script>
+
                     function editBlog(blogId) {
                         // Redirect to the edit page with the blog ID
                         window.location.href = `/edit/${blogId}`;
